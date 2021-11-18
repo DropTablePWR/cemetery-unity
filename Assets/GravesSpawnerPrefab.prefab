@@ -40,11 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8128131305686670073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d30cde04bc3c499faa3aa8beaefd020, type: 3}
+  m_Script: {fileID: 11500000, guid: aa3aadf77f3840f0b084763171d9ddb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countX: 3
-  countY: 3
-  myGameObject: {fileID: 0}
-  positions:
-  - {x: 5, y: 0, z: 5}
+  myGameObject: {fileID: 3580760986179942731, guid: 8ff3e03d7e0f4417d9f5b4c2506086b5, type: 3}

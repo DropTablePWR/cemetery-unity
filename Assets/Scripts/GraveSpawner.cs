@@ -5,7 +5,7 @@ using UnityEngine;
 public class GraveSpawner : MonoBehaviour
 {
     public GameObject myGameObject;
-    public List<Grave> graves;
+    public List<Grave> graves; //TODO idk how to pass graves here :<
 
     private void Start()
     {
