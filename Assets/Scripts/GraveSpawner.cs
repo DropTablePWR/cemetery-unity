@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GraveSpawner : MonoBehaviour
 {
-    public GameObject myGameObject;
-    public List<Grave> graves; //TODO idk how to pass graves here :<
+    public GameObject gravePrefab;
 
     private void Start()
     {
@@ -15,31 +16,43 @@ public class GraveSpawner : MonoBehaviour
 
     private void Apply()
     {
-        if (myGameObject == null)
+        var cemetery = ApiConnection.GetCemetery(1);
+        print(cemetery);
+        print(cemetery);
+        List<Grave> graves = new List<Grave>
         {
-            print("Dupa zbita");
-            return;
-        }
+            ApiConnection.GetGrave(1, 1)
+            // new Grave(new Guest(DateTime.Now, DateTime.Today, "Janek"), 0, 3),
+            // new Grave(new Guest(DateTime.Now, DateTime.Today, "Dupa"), 3, 6),
+            // new Grave(new Guest(DateTime.Now, DateTime.Today, "Chuj"), -3, 3)
+        };
 
-
-        Renderer localRenderer = myGameObject.GetComponent<Renderer>();
-        print(localRenderer);
-        if (localRenderer != null)
-        {
-            foreach (Transform t in transform)
-            {
-                Destroy(t.gameObject);
-            }
-        }
 
         var currentPosition = transform.localPosition;
         foreach (var grave in graves)
         {
-            var gravePosition = new Vector3(grave.x, 0, grave.y);
+            var gravePosition = new Vector3(4 * grave.gridX, 0, 4 * grave.gridY);
             var finalPosition = gravePosition + currentPosition;
-            GameObject go = Instantiate(myGameObject, finalPosition, Quaternion.identity, transform) as GameObject;
-            go.name = myGameObject.name + '_' + gravePosition.x + "_" + gravePosition.z;
-            
+            GameObject gravePrefabInstance =
+                Instantiate(gravePrefab, finalPosition, Quaternion.identity, transform);
+
+            gravePrefabInstance.name = gravePrefab.name + '_' + gravePosition.x + "_" + gravePosition.z;
+            var texts = gravePrefabInstance.GetComponentsInChildren<TextMeshPro>();
+            foreach (var text in texts)
+            {
+                if (text.name == "NameText")
+                {
+                    text.SetText(grave.guest.firstName + " " + grave.guest.lastName);
+                }
+                else if (text.name == "BirthText")
+                {
+                    text.SetText(grave.guest.birthDate);
+                }
+                else if (text.name == "DeadText")
+                {
+                    text.SetText(grave.guest.deathDate);
+                }
+            }
         }
     }
 }

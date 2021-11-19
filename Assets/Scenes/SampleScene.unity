@@ -353,6 +353,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3198240722027973167, guid: 8ff3e03d7e0f4417d9f5b4c2506086b5, type: 3}
+      propertyPath: dupa
+      value: CHUJ
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198240722027973167, guid: 8ff3e03d7e0f4417d9f5b4c2506086b5, type: 3}
       propertyPath: name
       value: 
       objectReference: {fileID: 37503566}
@@ -374,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6873139617172712178, guid: 8ff3e03d7e0f4417d9f5b4c2506086b5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.12
+      value: -6.14
       objectReference: {fileID: 0}
     - target: {fileID: 6873139617172712178, guid: 8ff3e03d7e0f4417d9f5b4c2506086b5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -762,6 +766,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c91c1eb85782d5748ace27eb4d7415bb, type: 3}
+--- !u!1 &2124740616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3580760986179942731, guid: 8ff3e03d7e0f4417d9f5b4c2506086b5, type: 3}
+  m_PrefabInstance: {fileID: 610571417}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8128131306549111410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -771,8 +780,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8128131305686670073, guid: 3d95ee1cd0fd747f3955e6db18913ddc, type: 3}
       propertyPath: m_Name
-      value: Graves
+      value: GravesSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8128131305686670078, guid: 3d95ee1cd0fd747f3955e6db18913ddc, type: 3}
+      propertyPath: gravePrefab
+      value: 
+      objectReference: {fileID: 2124740616}
     - target: {fileID: 8128131305686670078, guid: 3d95ee1cd0fd747f3955e6db18913ddc, type: 3}
       propertyPath: myGameObject
       value: 

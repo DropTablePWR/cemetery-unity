@@ -4,12 +4,12 @@ using System;
 public class Guest
 {
     public int id;
-    public String firstName;
-    public String lastName;
-    public String birthDate;
-    public String deathDate;
+    public string firstName;
+    public string lastName;
+    public string birthDate;
+    public string deathDate;
 
-    public Guest(int id, string firstName, string lastName, String birthDate, String deathDate)
+    public Guest(int id, string firstName, string lastName, string birthDate, string deathDate)
     {
         this.id = id;
         this.firstName = firstName;
