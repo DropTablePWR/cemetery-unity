@@ -702,9 +702,17 @@ PrefabInstance:
       value: GravesSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 8128131305686670078, guid: 3d95ee1cd0fd747f3955e6db18913ddc, type: 3}
+      propertyPath: fencePrefab
+      value: 
+      objectReference: {fileID: 6953180588729425408, guid: 4e45f2ba420fd4eb5a36752056c65fc2, type: 3}
+    - target: {fileID: 8128131305686670078, guid: 3d95ee1cd0fd747f3955e6db18913ddc, type: 3}
       propertyPath: gravePrefab
       value: 
       objectReference: {fileID: 3580760986179942731, guid: 8ff3e03d7e0f4417d9f5b4c2506086b5, type: 3}
+    - target: {fileID: 8128131305686670078, guid: 3d95ee1cd0fd747f3955e6db18913ddc, type: 3}
+      propertyPath: scaleFactor
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8128131305686670078, guid: 3d95ee1cd0fd747f3955e6db18913ddc, type: 3}
       propertyPath: myGameObject
       value: 
@@ -735,7 +743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128131305686670079, guid: 3d95ee1cd0fd747f3955e6db18913ddc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.79
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8128131305686670079, guid: 3d95ee1cd0fd747f3955e6db18913ddc, type: 3}
       propertyPath: m_LocalPosition.z
