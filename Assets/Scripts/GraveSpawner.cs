@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -17,21 +18,13 @@ public class GraveSpawner : MonoBehaviour
     private void Apply()
     {
         var cemetery = ApiConnection.GetCemetery(1);
-        print(cemetery);
-        print(cemetery);
-        List<Grave> graves = new List<Grave>
-        {
-            ApiConnection.GetGrave(1, 1)
-            // new Grave(new Guest(DateTime.Now, DateTime.Today, "Janek"), 0, 3),
-            // new Grave(new Guest(DateTime.Now, DateTime.Today, "Dupa"), 3, 6),
-            // new Grave(new Guest(DateTime.Now, DateTime.Today, "Chuj"), -3, 3)
-        };
+        List<Grave> graves = cemetery.tombstones;
 
-
+        var occupiedGraves = graves.Where(grave => grave.guest != null);
         var currentPosition = transform.localPosition;
-        foreach (var grave in graves)
+        foreach (var grave in occupiedGraves)
         {
-            var gravePosition = new Vector3(4 * grave.gridX, 0, 4 * grave.gridY);
+            var gravePosition = new Vector3(4 * grave.gridX, -3, 4 * grave.gridY);
             var finalPosition = gravePosition + currentPosition;
             GameObject gravePrefabInstance =
                 Instantiate(gravePrefab, finalPosition, Quaternion.identity, transform);
