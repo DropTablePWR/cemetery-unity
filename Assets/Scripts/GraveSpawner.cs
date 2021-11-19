@@ -11,6 +11,7 @@ public class GraveSpawner : MonoBehaviour
     public GameObject gravePrefab;
     public GameObject fencePrefab;
     public float scaleFactor;
+    public float wallHeight;
 
     private void Start()
     {
@@ -56,8 +57,39 @@ public class GraveSpawner : MonoBehaviour
             new Vector3(scaleFactor * cemetery.maxGridX, 0, scaleFactor * cemetery.maxGridY),
             new Vector3(0, 0, scaleFactor * cemetery.maxGridY),
         };
-        var fenceHorizontalScaleVector = new Vector3(scaleFactor * cemetery.maxGridX, 0, 0.4f);
-        var fenceVerticalScaleVector = new Vector3(scaleFactor * cemetery.maxGridY, 0, 0.4f);
+
+        var halfFactor = scaleFactor / 2;
+        var halfOfXWallLength = cemetery.maxGridX * halfFactor;
+        var halfOfYWallLength = cemetery.maxGridY * halfFactor;
+        var xWallLength = cemetery.maxGridX * scaleFactor;
+        var yWallLength = cemetery.maxGridY * scaleFactor;
+
+        Vector3[] centersOfWalls =
+        {
+            new Vector3(halfOfXWallLength, 0, 0),
+            new Vector3(xWallLength, 0, halfOfYWallLength),
+            new Vector3(halfOfXWallLength, 0, yWallLength),
+            new Vector3(0, 0, halfOfYWallLength),
+        };
+
+        var padding = new Vector3(-4,0,-4);
+        var finalPosition = currentPosition + padding;
+        
+        var fenceA = Instantiate(fencePrefab, centersOfWalls[0] + finalPosition, Quaternion.identity, transform);
+        fenceA.transform.localScale = new Vector3(xWallLength, wallHeight, 0.4f);
+        fenceA.name = "a";
+
+        var fenceB = Instantiate(fencePrefab, centersOfWalls[1] + finalPosition, Quaternion.identity, transform);
+        fenceB.transform.localScale = new Vector3(0.4f, wallHeight, yWallLength);
+        fenceB.name = "b";
+
+        var fenceC = Instantiate(fencePrefab, centersOfWalls[2] + finalPosition, Quaternion.identity, transform);
+        fenceC.transform.localScale = new Vector3(xWallLength, wallHeight, 0.4f);
+        fenceC.name = "c";
+
+        var fenceD = Instantiate(fencePrefab, centersOfWalls[3] + finalPosition, Quaternion.identity, transform);
+        fenceD.transform.localScale = new Vector3(0.4f, wallHeight, yWallLength);
+        fenceD.name = "d";
     }
 
 
