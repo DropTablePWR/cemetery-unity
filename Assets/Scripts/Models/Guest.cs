@@ -1,7 +1,8 @@
 using System;
+using Backend;
 
 [Serializable]
-public class Guest
+public class Guest : AData
 {
     public int id;
     public string firstName;

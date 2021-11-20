@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Backend;
 
 namespace Models
 {
     [Serializable]
-    public class Cemetery
+    public class Cemetery : AData
     {
         public int id;
         public string name;
