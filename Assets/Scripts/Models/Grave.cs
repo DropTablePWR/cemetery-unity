@@ -1,7 +1,8 @@
 using System;
+using Backend;
 
 [Serializable]
-public class Grave
+public class Grave : AData
 {
     public Guest guest;
     public int gridX;
