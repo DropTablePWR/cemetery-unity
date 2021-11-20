@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Backend;
 using Models;
 using TMPro;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class GraveSpawner : MonoBehaviour
     private void Start()
     {
         print("adding graves");
-        Apply();
+        App.Instance.GetBackend().GetCemetery(1, OnCemeteryFetched, OnCemeteryFetchFailed);
     }
 
     void spawnGraves(List<Grave> graves, Vector3 currentPosition)
@@ -92,14 +93,17 @@ public class GraveSpawner : MonoBehaviour
         fenceD.name = "d";
     }
 
-
-    private void Apply()
+    private void OnCemeteryFetched(Cemetery cemetery)
     {
-        var cemetery = ApiConnection.GetCemetery(1);
         List<Grave> graves = cemetery.tombstones;
         var occupiedGraves = graves.Where(grave => grave.guest != null).ToList();
         var currentPosition = transform.localPosition;
         spawnGraves(occupiedGraves, currentPosition);
         spawnFence(cemetery, currentPosition);
+    }
+
+    private void OnCemeteryFetchFailed(ARequest request)
+    {
+        Debug.Log($"Failed to fetch cemetery {request._stringResult}");
     }
 }

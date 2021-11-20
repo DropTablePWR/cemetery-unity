@@ -21,7 +21,6 @@ public class PersistentSingleton<T> : MonoBehaviour where T : MonoBehaviour
 
                 if (instance == null)
                 {
-                    Debug.Log($"Creating new {nameof(PersistentSingleton<T>)} type {nameof(T)}");
                     new GameObject(typeof(T).ToString()).AddComponent<T>();
                 }
 
