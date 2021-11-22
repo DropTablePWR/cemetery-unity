@@ -139,7 +139,7 @@ namespace Privi.Backend.Engine
         {
             JObject response = JObject.Parse(request._stringResult);
 
-            if (!((bool) response[request.successKey]))
+            if (!string.IsNullOrEmpty(request.successKey) && !((bool) response[request.successKey]))
             {
                 if (request.retryOnFail && request.retryCount < request.retryLimit)
                 {
@@ -166,7 +166,7 @@ namespace Privi.Backend.Engine
         {
             JObject response = JObject.Parse(request._stringResult);
 
-            if (!((bool) response[request.successKey]))
+            if (!string.IsNullOrEmpty(request.successKey) && !((bool) response[request.successKey]))
             {
                 if (request.retryOnFail && request.retryCount < request.retryLimit)
                 {
@@ -213,7 +213,7 @@ namespace Privi.Backend.Engine
                 return;
             }
 
-            if (!request.successKey.Equals("") && response[request.successKey] != null && !((bool) response[request.successKey]))
+            if (!string.IsNullOrEmpty(request.successKey) && !((bool) response[request.successKey]))
             {
                 if (request.retryOnFail && request.retryCount < request.retryLimit)
                 {
