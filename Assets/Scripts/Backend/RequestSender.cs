@@ -168,9 +168,7 @@ namespace Privi.Backend.Engine
             {
                 parsedData = JsonUtility.FromJson<T>(output[GetLastOutputKey(request.outputKey)].ToString()) as AData;
             }
-            
-            
-            
+
             parsedData.Preprocess();
             request.SetResult(parsedData);
             request.OnSuccess();
@@ -252,7 +250,15 @@ namespace Privi.Backend.Engine
             else
             {
                 JObject output = GetNestedJSONKey(response.ToString(), request.outputKey);
-                message = output[GetLastOutputKey(request.outputKey)].ToString();
+
+                if (string.IsNullOrEmpty(request.outputKey))
+                {
+                    message = output.ToString();
+                }
+                else
+                {
+                    message = output[GetLastOutputKey(request.outputKey)].ToString();
+                }
             }
 
 
