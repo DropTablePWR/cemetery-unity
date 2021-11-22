@@ -154,8 +154,23 @@ namespace Privi.Backend.Engine
                 return;
             }
             JObject output = GetNestedJSONKey(response.ToString(), request.outputKey);
-            var parsedData = JsonUtility.FromJson<T>(output[GetLastOutputKey(request.outputKey)].ToString()) as AData;
-            parsedData.jsonData = output[request.outputKey].ToString();
+            Debug.Log(request.outputKey);
+            Debug.Log(GetLastOutputKey(request.outputKey));
+            Debug.Log(output);
+
+            AData parsedData;
+
+            if (string.IsNullOrEmpty(request.outputKey))
+            {
+                parsedData = JsonUtility.FromJson<T>(output.ToString()) as AData;
+            }
+            else
+            {
+                parsedData = JsonUtility.FromJson<T>(output[GetLastOutputKey(request.outputKey)].ToString()) as AData;
+            }
+            
+            
+            
             parsedData.Preprocess();
             request.SetResult(parsedData);
             request.OnSuccess();
