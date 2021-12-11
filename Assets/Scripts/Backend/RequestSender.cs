@@ -154,9 +154,7 @@ namespace Privi.Backend.Engine
                 return;
             }
             JObject output = GetNestedJSONKey(response.ToString(), request.outputKey);
-            Debug.Log(request.outputKey);
-            Debug.Log(GetLastOutputKey(request.outputKey));
-            Debug.Log(output);
+
 
             AData parsedData;
 
@@ -226,7 +224,6 @@ namespace Privi.Backend.Engine
                 return;
             }
             
-            Debug.Log("HR2");
 
             if (!string.IsNullOrEmpty(request.successKey) && !((bool) response[request.successKey]))
             {
@@ -244,8 +241,6 @@ namespace Privi.Backend.Engine
 
                 return;
             }
-            
-            Debug.Log("HR3");
 
             string message;
 

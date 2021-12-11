@@ -1,4 +1,6 @@
-﻿using Models;
+﻿using System.Collections.Generic;
+using Models;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Backend
@@ -47,6 +49,22 @@ namespace Backend
         {
             DeleteFeatureRequest request = new DeleteFeatureRequest(slot._manager.GetCemeteryId(), slot._manager.GetGraveId(), itemId, onSuccess, onFail);
             request.Push();
+        }
+        
+        public void GetAllCemeteries(UnityAction<List<Cemetery>> onSuccess, UnityAction<ARequest> onFail)
+        {
+            GetAllCemeteriesRequest request = new GetAllCemeteriesRequest(OnSuccess, onFail);
+            request.Push();
+            
+            void OnSuccess(ARequest request)
+            {
+                List<Cemetery> list = new List<Cemetery>();
+                foreach (AData data in request._arrayResult)
+                {
+                    list.Add((Cemetery)data);
+                }
+                onSuccess.Invoke(list);
+            }         
         }
         
     }

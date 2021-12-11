@@ -16,8 +16,8 @@ public class GraveSpawner : MonoBehaviour
 
     private void Start()
     {
-        print("adding graves");
-        App.Instance.GetBackend().GetCemetery(1, OnCemeteryFetched, OnCemeteryFetchFailed);
+        int cid = URLParameters.GetSearchParameters().GetInt("cemetery_id", 1);
+        App.Instance.GetBackend().GetCemetery(cid, OnCemeteryFetched, OnCemeteryFetchFailed);
     }
 
     void spawnGraves(Cemetery cemetery, Vector3 currentPosition)

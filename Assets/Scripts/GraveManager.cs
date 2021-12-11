@@ -81,8 +81,7 @@ namespace Backend
         public void InitializeGrave(Grave grave)
         {
             _grave = grave;
-            Debug.Log(_grave.features);
-            
+
             if (_grave.features != null)
             {
                 foreach (var feature in _grave.features)
