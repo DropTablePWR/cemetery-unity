@@ -22,6 +22,8 @@
         {
             GetGrave = 0,
             GetCemetery = 1,
+            PostFeature = 2,
+            DeleteFeature = 3,
             
         }
     }

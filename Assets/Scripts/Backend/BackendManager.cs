@@ -30,6 +30,24 @@ namespace Backend
                 onSuccess.Invoke(cemetery);
             }            
         }
+
+        public void PutFeature(ItemSlot slot, int itemId, UnityAction<Feature> onSuccess, UnityAction<ARequest> onFail)
+        {
+            AddFeatureRequest request = new AddFeatureRequest(slot._manager.GetCemeteryId(), slot._manager.GetGraveId(), itemId, slot.GetSlotId(), OnSuccess, onFail);
+            request.Push();
+            
+            void OnSuccess(ARequest request)
+            {
+                Feature feature = (Feature) request._objectResult;
+                onSuccess.Invoke(feature);
+            }         
+        }
+        
+        public void DeleteFeature(ItemSlot slot, int itemId, UnityAction<ARequest> onSuccess, UnityAction<ARequest> onFail)
+        {
+            DeleteFeatureRequest request = new DeleteFeatureRequest(slot._manager.GetCemeteryId(), slot._manager.GetGraveId(), itemId, onSuccess, onFail);
+            request.Push();
+        }
         
     }
 }

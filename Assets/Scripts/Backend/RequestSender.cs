@@ -127,8 +127,8 @@ namespace Privi.Backend.Engine
             }
             else
             {
-                
-                request.SetResult(www.downloadHandler.text);
+                string text = www.downloadHandler != null ? www.downloadHandler.text : "{}";
+                request.SetResult(text);
                 ParseTextResponse(request);
             }
         }
@@ -225,6 +225,8 @@ namespace Privi.Backend.Engine
                 request.OnFail();
                 return;
             }
+            
+            Debug.Log("HR2");
 
             if (!string.IsNullOrEmpty(request.successKey) && !((bool) response[request.successKey]))
             {
@@ -242,6 +244,8 @@ namespace Privi.Backend.Engine
 
                 return;
             }
+            
+            Debug.Log("HR3");
 
             string message;
 
@@ -260,8 +264,7 @@ namespace Privi.Backend.Engine
                     message = output[GetLastOutputKey(request.outputKey)].ToString();
                 }
             }
-
-
+            
             request.SetResult(message);
             request.OnSuccess();
         }
@@ -284,6 +287,11 @@ namespace Privi.Backend.Engine
                 {
                     www = UnityWebRequest.Post(request.url, request.data);
                     bodyRaw = Encoding.UTF8.GetBytes(request.data);
+                }
+                else if (request.httpRequestType == Enums.RequestType.DELETE)
+                {
+                    www = UnityWebRequest.Delete(request.url);
+                    bodyRaw = Encoding.UTF8.GetBytes("{}");
                 }
                 else
                 {

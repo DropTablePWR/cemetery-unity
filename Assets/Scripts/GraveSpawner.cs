@@ -20,14 +20,20 @@ public class GraveSpawner : MonoBehaviour
         App.Instance.GetBackend().GetCemetery(1, OnCemeteryFetched, OnCemeteryFetchFailed);
     }
 
-    void spawnGraves(List<Grave> graves, Vector3 currentPosition)
+    void spawnGraves(Cemetery cemetery, Vector3 currentPosition)
     {
+        List<Grave> graves = cemetery.tombstones.Where(grave => grave.guest != null).ToList();
+        
         foreach (var grave in graves)
         {
+            grave.SetCemeteryId(cemetery.id);
             var gravePosition = new Vector3(scaleFactor * grave.gridX, 0, scaleFactor * grave.gridY);
             var finalPosition = gravePosition + currentPosition;
             GameObject gravePrefabInstance =
                 Instantiate(gravePrefab, finalPosition, Quaternion.identity, transform);
+
+            GraveManager _manager = gravePrefabInstance.GetComponent<GraveManager>();
+            _manager.InitializeGrave(grave);
 
             gravePrefabInstance.name = gravePrefab.name + '_' + gravePosition.x + "_" + gravePosition.z;
             var texts = gravePrefabInstance.GetComponentsInChildren<TextMeshPro>();
@@ -95,10 +101,8 @@ public class GraveSpawner : MonoBehaviour
 
     private void OnCemeteryFetched(Cemetery cemetery)
     {
-        List<Grave> graves = cemetery.tombstones;
-        var occupiedGraves = graves.Where(grave => grave.guest != null).ToList();
         var currentPosition = transform.localPosition;
-        spawnGraves(occupiedGraves, currentPosition);
+        spawnGraves(cemetery, currentPosition);
         spawnFence(cemetery, currentPosition);
     }
 
